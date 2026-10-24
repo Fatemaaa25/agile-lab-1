@@ -1,0 +1,29 @@
+
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check HTML file exists
+        run: test -f index.html
+
+      - name: Validate HTML content
+        run: grep -q "Hello CI/CD" index.html
+
+      - name: Build application
+        run: echo "Application build successful!"
+
+      - name: Prepare deployment
+        run: echo "Application is ready for deployment!"
